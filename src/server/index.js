@@ -35,6 +35,7 @@ express()
           <meta charset="utf-8">
           <title>${name} -- FlyRTC</title>
           <script src="/static/app.min.js" defer></script>
+          <link rel="stylesheet" type="text/css" href="/static/app.min.css">
         </head>
         <body>
           <div id="content"></div>
