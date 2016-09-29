@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+const path = require('path');
+
 const dedent = require('dedent-js');
 const express = require('express');
 const mdns = require('mdns');
@@ -25,16 +27,22 @@ const advertisement = mdns.createAdvertisement(mdns.tcp('flyweb'), port, {
 });
 
 express()
-  .use('/', (request, response) => response.send(dedent`
-    <!doctype html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <title>${name} -- FlyRTC</title>
-    </head>
-    <body></body>
-    </html>
-  `))
+  .get('/', (request, response) => {
+    response.send(dedent`
+      <!doctype html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <title>${name} -- FlyRTC</title>
+          <script src="/static/app.min.js" defer></script>
+        </head>
+        <body>
+          <div id="content"></div>
+        </body>
+      </html>
+    `);
+  })
+  .use('/static', express.static(path.join(__dirname, '..', '..', 'dist', 'static')))
   .listen(port, () => {
     console.log(`Server listening at http://localhost:${port}/.`);
     advertisement.start();
