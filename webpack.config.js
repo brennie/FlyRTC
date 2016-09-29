@@ -18,6 +18,19 @@ const config = {
     filename: path.join('static', 'app.min.js'),
   },
 
+  module: {
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          cacheDirectory: true,
+        },
+      },
+    ],
+  },
+
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
