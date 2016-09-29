@@ -1,0 +1,19 @@
+{
+  "name": "flyrtc",
+  "version": "0.1.0",
+  "description": "A FlyWeb-based local chat server and client.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brennie/flyrtc.git"
+  },
+  "keywords": [
+    "flyweb",
+    "chat"
+  ],
+  "author": "Barret Rennie <barret@brennie.ca>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brennie/flyrtc/issues"
+  },
+  "homepage": "https://github.com/brennie/flyrtc#readme"
+}
