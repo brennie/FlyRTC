@@ -20,6 +20,8 @@
     "dedent-js": "^1.0.1",
     "express": "^4.14.0",
     "mdns": "^2.3.3",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
     "yargs": "^5.0.0"
   },
   "devDependencies": {
@@ -28,6 +30,7 @@
     "babel-plugin-transform-class-properties": "^6.16.0",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.16.0",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
     "webpack": "^1.13.2"
   }
 }
