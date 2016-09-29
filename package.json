@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/brennie/flyrtc/issues"
   },
-  "homepage": "https://github.com/brennie/flyrtc#readme"
+  "homepage": "https://github.com/brennie/flyrtc#readme",
+  "dependencies": {
+    "dedent-js": "^1.0.1",
+    "express": "^4.14.0",
+    "mdns": "^2.3.3",
+    "yargs": "^5.0.0"
+  }
 }
