@@ -69,7 +69,6 @@ const config = {
       require('cssnano'),
       require('postcss-reporter')({
         clearMessages: true,
-        throwError: true,
       }),
     ],
   }),
