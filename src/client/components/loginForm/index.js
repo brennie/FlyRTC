@@ -1,21 +1,23 @@
-import React from 'react';
+import {connect} from 'react-redux';
 
-import './style';
+import {setLoginFormErrors, setUsername, submitLoginForm} from '../../actions/auth';
+import LoginForm from './loginForm';
 
 
-const LoginForm = () => (
-  <section className="login-form">
-    <h2>FlyRTC</h2>
-    <form onSubmit={e => e.preventDefault()}>
-      <label htmlFor="login-form__username">
-        Username
-      </label>
-      <input type="text"
-             id="login-form__username" />
-      <input type="submit"
-             value="Login" />
-    </form>
-  </section>
-);
+const mapStateToProps = state => ({
+  disabled: state.auth.loginForm.disabled,
+  username: state.auth.loginForm.username,
+  errors: state.auth.loginForm.errors,
+});
 
-export default LoginForm;
+const mapDispatchToProps = dispatch => ({
+  setUsername: username => dispatch(setUsername(username)),
+  setErrors: errors => dispatch(setLoginFormErrors(errors)),
+  submit: event => {
+    event.preventDefault();
+    return dispatch(submitLoginForm())
+  },
+});
+
+const LoginFormContainer = connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default LoginFormContainer;
