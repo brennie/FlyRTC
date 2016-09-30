@@ -5,6 +5,7 @@ import {
 } from '../actions/auth';
 
 const initialState = {
+  secret: null,
   loginForm: {
     disabled: false,
     errors: [],

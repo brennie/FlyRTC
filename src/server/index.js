@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const crypto = require('crypto');
 const path = require('path');
 
 const dedent = require('dedent-js');
@@ -26,6 +27,14 @@ const advertisement = mdns.createAdvertisement(mdns.tcp('flyweb'), port, {
   name: `FlyRTC (${name})`,
 });
 
+const secret = crypto
+  .createHash('sha1')
+  .update(crypto.randomBytes(32), 'binary')
+  .digest('hex');
+
+const url = `http://localhost:${port}/`;
+const adminUrl = `${url}?secret=${secret}`;
+
 express()
   .get('/', (request, response) => {
     response.send(dedent`
@@ -45,6 +54,7 @@ express()
   })
   .use('/static', express.static(path.join(__dirname, '..', '..', 'dist', 'static')))
   .listen(port, () => {
-    console.log(`Server listening at http://localhost:${port}/.`);
+    console.log(`Server listening at ${url}`);
+    console.log(`Admin page: ${adminUrl}`);
     advertisement.start();
   });

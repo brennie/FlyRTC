@@ -7,8 +7,14 @@ import LoginFormContainer from './components/loginForm';
 import reducer from './reducers';
 import './style';
 
-const store = createStore(reducer, {});
 
+const secret = new URLSearchParams(location.search.slice(1)).get('secret');
+const store = createStore(reducer, {
+  auth: {secret},
+});
+
+/* Hide the secret so someone can't steal it by peering over your shoulder. */
+history.replaceState(null, null, '/');
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
