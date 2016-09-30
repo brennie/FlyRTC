@@ -6,17 +6,29 @@ const path = require('path');
 const dedent = require('dedent-js');
 const express = require('express');
 const mdns = require('mdns');
+const open = require('open');
 const yargs = require('yargs');
 
 
 const args = yargs
   .usage('$0 NAME PORT')
+  .options({
+    b: {
+      alias: 'browser',
+      description: 'Open FlyRTC in your browser.',
+      type: 'boolean',
+    },
+  })
   .help()
   .alias('h', 'help')
   .demand(2)
   .argv;
 
-const {_: [name, portStr]} = args;
+const {
+  browser: openInBrowser,
+  _: [name, portStr]
+} = args;
+
 const port = parseInt(portStr);
 if (isNaN(port) || port <= 0 || port > 65535) {
   console.error('PORT must be a valid port.');
@@ -55,6 +67,10 @@ express()
   .use('/static', express.static(path.join(__dirname, '..', '..', 'dist', 'static')))
   .listen(port, () => {
     console.log(`Server listening at ${url}`);
-    console.log(`Admin page: ${adminUrl}`);
+
+    if (openInBrowser)
+      open(adminUrl);
+    else
+      console.log(`Admin URL: ${adminUrl}`);
     advertisement.start();
   });
