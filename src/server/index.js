@@ -18,6 +18,12 @@ const args = yargs
       description: 'Open FlyRTC in your browser.',
       type: 'boolean',
     },
+    p: {
+      alias: 'password',
+      description: 'An optional password required to login.',
+      nargs: 1,
+      type: 'string',
+    }
   })
   .help()
   .alias('h', 'help')
@@ -26,6 +32,7 @@ const args = yargs
 
 const {
   browser: openInBrowser,
+  password: hasPassword,
   _: [name, portStr]
 } = args;
 
@@ -55,6 +62,14 @@ express()
         <head>
           <meta charset="utf-8">
           <title>${name} -- FlyRTC</title>
+          <script>
+            const config = {
+              auth: {
+                hasPassword: ${!!hasPassword},
+                secret: new URLSearchParams(location.search.slice(1)).get('secret'),
+              },
+            };
+          </script>
           <script src="/static/app.min.js" defer></script>
           <link rel="stylesheet" type="text/css" href="/static/app.min.css">
         </head>

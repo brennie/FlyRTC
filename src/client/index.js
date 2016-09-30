@@ -8,10 +8,7 @@ import reducer from './reducers';
 import './style';
 
 
-const secret = new URLSearchParams(location.search.slice(1)).get('secret');
-const store = createStore(reducer, {
-  auth: {secret},
-});
+const store = createStore(reducer);
 
 /* Hide the secret so someone can't steal it by peering over your shoulder. */
 history.replaceState(null, null, '/');

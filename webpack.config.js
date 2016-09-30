@@ -13,6 +13,10 @@ const config = {
 
   entry: path.join(__dirname, 'src', 'client', 'index.js'),
 
+  externals: {
+    'config': 'config',
+  },
+
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/',

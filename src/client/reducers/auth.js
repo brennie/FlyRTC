@@ -4,8 +4,11 @@ import {
   SUBMIT_LOGIN_FORM,
 } from '../actions/auth';
 
+import config from 'config';
+
+
 const initialState = {
-  secret: null,
+  ...config.auth,
   loginForm: {
     disabled: false,
     errors: [],

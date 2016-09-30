@@ -4,7 +4,7 @@ let createStore;
 
 if (process.env.NODE_ENV === 'production')
   createStore = createReduxStore;
-else {
+else
   createStore = (reducer, initialState, enhancer) => createReduxStore(
     reducer,
     initialState,
@@ -13,6 +13,5 @@ else {
       window.devToolsExtension ? window.devToolsExtension() : e => e
     )
   );
-}
 
 export default createStore;
