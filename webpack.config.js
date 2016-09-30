@@ -35,7 +35,7 @@ const config = {
           'style-loader',
           '!css-loader?sourceMap&importLoaders=1!postcss-loader'
         ),
-      }
+      },
     ],
   },
 
