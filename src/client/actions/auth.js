@@ -4,10 +4,10 @@ export const setLoginFormErrors = errors => ({
   errors,
 });
 
-export const SET_USERNAME = 'SET_USERNAME';
-export const setUsername = username => ({
-  type: SET_USERNAME,
-  username,
+export const UPDATE_LOGIN_FORM_FIELDS = 'UPDATE_LOGIN_FORM_FIELDS';
+export const updateLoginFormFields = fields => ({
+  type: UPDATE_LOGIN_FORM_FIELDS,
+  fields,
 });
 
 

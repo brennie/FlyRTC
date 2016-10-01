@@ -31,9 +31,9 @@ const args = yargs
   .argv;
 
 const {
+  _: [name, portStr],
   browser: openInBrowser,
-  password: hasPassword,
-  _: [name, portStr]
+  password,
 } = args;
 
 const port = parseInt(portStr);
@@ -65,7 +65,7 @@ express()
           <script>
             const config = {
               auth: {
-                hasPassword: ${!!hasPassword},
+                hasPassword: ${!!password},
                 secret: new URLSearchParams(location.search.slice(1)).get('secret'),
               },
             };

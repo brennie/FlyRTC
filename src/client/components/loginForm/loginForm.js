@@ -3,16 +3,15 @@ import React from 'react';
 import './style';
 
 const usernameValidationRe = /^[A-Za-z0-9_]*$/;
-const onUsernameChanged = username => new Promise((resolve, reject) => {
+const onUsernameChanged = username => {
+  const errors = [];
   if (!usernameValidationRe.test(username))
-    reject([
-      'Usernames can only contain alphanumeric characters and underscores.',
-    ]);
+    errors.push('Usernames can only contain alphanumeric characters and underscores.');
 
-  resolve(username);
-});
+  return errors;
+};
 
-const LoginForm = ({disabled, username, submit, setUsername, setErrors}) => (
+const LoginForm = ({disabled, fields, submit, setField, setErrors}) => (
   <section className="login-form">
     <h2>FlyRTC</h2>
     <form onSubmit={submit}>
@@ -21,8 +20,17 @@ const LoginForm = ({disabled, username, submit, setUsername, setErrors}) => (
       </label>
       <input type="text"
              id="login-form__username"
-             value={username}
-             onChange={(e) => onUsernameChanged(e.target.value).then(setUsername, setErrors)}
+             value={fields.get('username')}
+             onChange={e => {
+               const username = e.target.value;
+               const errors = onUsernameChanged(username);
+
+               if (errors.length) {
+                 setErrors('username', errors);
+               }
+               else
+                 setField('username', username);
+             } }
              disabled={disabled} />
       <input type="submit"
              value="Login"
