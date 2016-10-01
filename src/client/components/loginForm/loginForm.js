@@ -11,33 +11,54 @@ const onUsernameChanged = username => {
   return errors;
 };
 
-const LoginForm = ({disabled, fields, submit, setField, setErrors}) => (
-  <section className="login-form">
-    <h2>FlyRTC</h2>
-    <form onSubmit={submit}>
-      <label htmlFor="login-form__username">
-        Username
-      </label>
-      <input type="text"
-             id="login-form__username"
-             value={fields.get('username')}
-             onChange={e => {
-               const username = e.target.value;
-               const errors = onUsernameChanged(username);
+const LoginForm = (props) => {
+  const {
+    disabled,
+    errors,
+    fields,
+    hasPassword,
+    setErrors,
+    setField,
+    submit,
+  } = props;
 
-               if (errors.length) {
-                 setErrors('username', errors);
-               }
-               else
-                 setField('username', username);
-             } }
+  const passwordField = !hasPassword ? null : (
+    <label>
+      Password
+      <input type="text"
+             onChange={e => setField('password', e.target.value)}
              disabled={disabled} />
-      <input type="submit"
-             value="Login"
-             disabled={disabled} />
-    </form>
-  </section>
-);
+    </label>
+  );
+
+  return (
+    <section className="login-form">
+      <h2>FlyRTC</h2>
+      <form onSubmit={submit}>
+        <label>
+          <span>Username</span>
+          <input type="text"
+                 value={fields.get('username')}
+                 onChange={e => {
+                   const username = e.target.value;
+                   const errors = onUsernameChanged(username);
+
+                   if (errors.length) {
+                     setErrors('username', errors);
+                   }
+                   else
+                     setField('username', username);
+                 } }
+               disabled={disabled} />
+        </label>
+        {passwordField}
+        <input type="submit"
+               value="Login"
+               disabled={disabled} />
+      </form>
+    </section>
+  );
+};
 
 
 export default LoginForm;

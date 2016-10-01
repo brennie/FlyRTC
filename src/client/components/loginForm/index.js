@@ -12,6 +12,7 @@ const mapStateToProps = state => ({
   disabled: state.auth.loginForm.disabled,
   errors: state.auth.loginForm.errors,
   fields: state.auth.loginForm.fields,
+  hasPassword: state.auth.hasPassword,  
 });
 
 const mapDispatchToProps = dispatch => ({
